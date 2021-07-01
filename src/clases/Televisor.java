@@ -100,21 +100,50 @@ public class Televisor implements interfaz.IValidacionTv{
         this.nombreEmpresaCable = nombreEmpresaCable;
     }
     
+    @Override
     public boolean ValidarMarca(String marca){
-        return marca.matches("[A-Z]{4,5}");
+        char[] charArray;
+        boolean sigue = true;
+        char caracter, caracter2;
+        int contador = 0;
+        charArray = marca.toCharArray();
+        for(int i = 0; i < charArray.length; i++){
+            caracter = charArray[i];
+            for(int j = 0; j < charArray.length; j++){
+                caracter2 = charArray[j];
+                if(charArray[j] == caracter){
+                    
+                    contador++;
+                }    
+            }
+            if(contador > 1){
+            sigue = false;
+            }
+            contador = 0;
+        }
+        if(sigue){
+            if(marca.matches("[A-Z]{4,}"))
+                return true;
+        }
+        return false;
     }
+    @Override
     public boolean ValidarModelo(String modelo){
         return true;
     }
+    @Override
     public boolean ValidarPulgadas(int pulgadas){
         return true;
     }
+    @Override
     public boolean ValidarSmartTv(char smartTv){
         return true;
     }
+    @Override
     public boolean ValidarNombreEmpresaCable(String nEmpCable){
         return true;
     }
+    @Override
     public boolean ValidarValor(float valor){
         return valor > 0 && valor < 1000;
     }
