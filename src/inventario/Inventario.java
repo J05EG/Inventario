@@ -47,7 +47,7 @@ public class Inventario {
         Televisor tv = new Televisor();
         System.out.println("Ingrese Marca (Solo letras mayusculas, minimo 4 caracteres)");
         tv.setMarca(sn.nextLine());
-        System.out.println("Ingrese pulgadas");
+        System.out.println("Ingrese pulgadas min 32");
         tv.setPulgadas(sn.nextInt());
         System.out.println("Ingrese valor tv (Valor en USD menor a 1000)");
         tv.setValor(sn.nextFloat());
