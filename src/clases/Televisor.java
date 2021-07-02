@@ -52,7 +52,6 @@ public class Televisor implements interfaz.IValidacionTv{
         boolean sigue = true;
         if(ValidarMarca(marca.trim())){
             this.marca = marca.trim();
-            sigue = false;
         }else{
             while(sigue){
                 Scanner sc = new Scanner(System.in);
@@ -71,7 +70,20 @@ public class Televisor implements interfaz.IValidacionTv{
     }
 
     public void setModelo(String modelo) {
-        this.modelo = modelo;
+        boolean sigue = true;
+        if(ValidarModelo(modelo.trim())){
+            this.modelo = modelo.trim();
+        }else{
+            while(sigue){
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Introduzca una modelo valido");
+                modelo = sc.nextLine();
+                if(ValidarModelo(modelo.trim())){
+                    this.modelo = modelo.trim();
+                    sigue = false;
+                }
+            }
+        }
     }
 
     public int getPulgadas() {
@@ -117,8 +129,9 @@ public class Televisor implements interfaz.IValidacionTv{
             }
             contador = 0;
         }
-        if(!sigue)
-        System.out.println("No se deben reperir letras");
+        if(!sigue){
+            System.out.println("No se deben reperir letras");
+        }
         if(sigue){
             if(marca.matches("[A-Z]{4,}")){
                 return true;
@@ -128,14 +141,36 @@ public class Televisor implements interfaz.IValidacionTv{
         }
         return false;
     }
+    
     @Override
     public boolean ValidarModelo(String modelo){
-        return true;
+        if(modelo.matches("(?![aeiouAEIOU])[a-zA-Z]{2}(?![0])[0-9]{3}(?![02468])[0-9]")){
+            String numeros = modelo.substring(2,6);
+            System.out.println(numeros);
+            int suma = 0;
+            for(int i=0; i<numeros.length(); i++){
+                suma+=(Character.getNumericValue(numeros.charAt(i)));
+            }
+            if(suma<=20){
+                if(modelo.contains("7")){
+                    return true;
+                }else{
+                    System.out.println("no hay un 7");
+                }
+            }else{
+                System.out.println("la suma es > 20");
+            }
+        }else{
+            System.out.println("no cumple la expresion");
+        }
+        return false;
     }
+    
     @Override
     public boolean ValidarPulgadas(int pulgadas){
         return true;
     }
+    
     @Override
     public boolean ValidarSmartTv(char smartTv){
         return true;
