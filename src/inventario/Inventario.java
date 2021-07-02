@@ -47,18 +47,35 @@ public class Inventario {
     public static void IngresarTv(){
         Scanner sn = new Scanner(System.in);
         Televisor tv = new Televisor();
+        boolean sigue = false;
         System.out.println("Ingrese Marca (Solo letras mayusculas, minimo 4 caracteres)");
         tv.setMarca(sn.nextLine());
         System.out.println("Ingrese Modelo (2 consonantes y 4 números)");
         tv.setModelo(sn.nextLine());
-        System.out.println("Ingrese pulgadas min 32, max 55");
-        tv.setPulgadas(sn.nextInt());
+        while(!sigue){
+            System.out.println("Ingrese pulgadas min 32, max 55");
+            try{
+                tv.setPulgadas(Integer.valueOf(sn.nextLine()));
+                sigue = true;
+            }catch(Exception e){
+                System.out.println("Ingresar valor solicitado por favor. Error: "+e.getMessage());
+            }
+        }
         System.out.println("Es Smart TV? Ingrese S o N (Si, No)");
-        tv.setSmartTv(sn.nextLine().charAt(0));
+        char siNo = sn.nextLine().charAt(0);
+        tv.setSmartTv(siNo);
         System.out.println("Ingrese Nombre de Empresa Cable (Max 8 caracteres en mayúsculas)");
         tv.setNombreEmpresaCable(sn.nextLine());
-        System.out.println("Ingrese valor tv (Valor en USD menor a 1000)");
-        tv.setValor(sn.nextFloat());
+        sigue = false;
+        while(!sigue){
+            System.out.println("Ingrese valor tv (Valor en USD menor a 1000)");
+            try{
+                tv.setValor(Float.parseFloat(sn.nextLine()));
+                sigue = true;
+            }catch(Exception e){
+                System.out.println("Ingresar valor solicitado por favor. Error: "+e.getMessage());
+            }
+        }
         tv.printTelevisor();
     }
     
