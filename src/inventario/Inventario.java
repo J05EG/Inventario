@@ -5,6 +5,7 @@
  */
 package inventario;
 
+import clases.Camara;
 import clases.Televisor;
 import java.util.Scanner;
 
@@ -32,12 +33,13 @@ public class Inventario {
                     IngresarTv();
                     break;
                 case 2:
+                    IngresarCam();
                     break;
                  case 3:
                      salir=true;
                     break;
                  default:
-                    System.out.println("Solo opciones entre 1 y 5");
+                    System.out.println("Solo opciones entre 1 y 3");
             }
         }
     }
@@ -47,11 +49,34 @@ public class Inventario {
         Televisor tv = new Televisor();
         System.out.println("Ingrese Marca (Solo letras mayusculas, minimo 4 caracteres)");
         tv.setMarca(sn.nextLine());
-        System.out.println("Ingrese pulgadas min 32");
+        System.out.println("Ingrese Modelo (2 consonantes y 4 números)");
+        tv.setModelo(sn.nextLine());
+        System.out.println("Ingrese pulgadas min 32, max 55");
         tv.setPulgadas(sn.nextInt());
+        System.out.println("Es Smart TV? Ingrese S o N (Si, No)");
+        tv.setSmartTv(sn.nextLine().charAt(0));
+        System.out.println("Ingrese Nombre de Empresa Cable (Max 8 caracteres en mayúsculas)");
+        tv.setNombreEmpresaCable(sn.nextLine());
         System.out.println("Ingrese valor tv (Valor en USD menor a 1000)");
         tv.setValor(sn.nextFloat());
         tv.printTelevisor();
     }
     
+    public static void IngresarCam(){
+        Scanner sn = new Scanner(System.in);
+        Camara cam = new Camara();
+        System.out.println("Ingrese Código");
+        cam.setCodigo(sn.nextLine());
+        System.out.println("Ingrese Modelo (2 consonantes y 4 números)");
+        cam.setModelo(sn.nextLine());
+        System.out.println("Ingrese Giro de 0 a 360° (Solo el número)");
+        cam.setGiro(sn.nextInt());
+        System.out.println("Ingrese Megapixeles (min 5,0 - max 16,3)");
+        cam.setMegapixeles(sn.nextFloat());
+        System.out.println("Ingrese Alcance de Wifi en metros (mix 3,0 - max 14,0)");
+        cam.setMetrosAlcanceWifi(sn.nextFloat());
+        System.out.println("Ingrese valor tv (Valor en USD menor a 1000)");
+        cam.setValor(sn.nextFloat());
+        cam.printCamara();
+    }
 }
