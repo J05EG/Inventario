@@ -15,7 +15,7 @@ public class Televisor implements interfaz.IValidacionTv{
     private String marca;
     private String modelo;
     private int pulgadas;
-    private char smartTv;
+    private String smartTv;
     private String nombreEmpresaCable;
     private float valor;
 
@@ -91,15 +91,41 @@ public class Televisor implements interfaz.IValidacionTv{
     }
 
     public void setPulgadas(int pulgadas) {
-        this.pulgadas = pulgadas;
+        boolean sigue = true;
+        if(ValidarPulgadas(pulgadas)){
+            this.pulgadas = pulgadas;
+        }else{
+            while(sigue){
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Introduzca pulgadas validas");
+                pulgadas = Integer.valueOf(sc.nextLine());
+                if(ValidarPulgadas(pulgadas)){
+                    this.pulgadas = pulgadas;
+                    sigue = false;
+                }
+            }
+        }
     }
 
-    public char getSmartTv() {
+    public String getSmartTv() {
         return smartTv;
     }
 
-    public void setSmartTv(char smartTv) {
-        this.smartTv = smartTv;
+    public void setSmartTv(String smartTv) {
+        boolean sigue = true;
+        if(ValidarSmartTv(smartTv.trim())){
+            this.smartTv = smartTv.trim();
+        }else{
+            while(sigue){
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Introduzca caracter válido (S o N)");
+                smartTv = sc.nextLine();
+                if(ValidarSmartTv(smartTv.trim())){
+                    this.smartTv = smartTv.trim();
+                    sigue = false;
+                }
+            }
+        }
     }
 
     public String getNombreEmpresaCable() {
@@ -107,7 +133,20 @@ public class Televisor implements interfaz.IValidacionTv{
     }
 
     public void setNombreEmpresaCable(String nombreEmpresaCable) {
-        this.nombreEmpresaCable = nombreEmpresaCable;
+        boolean sigue = true;
+        if(ValidarNombreEmpresaCable(nombreEmpresaCable.trim())){
+            this.nombreEmpresaCable = nombreEmpresaCable.trim();
+        }else{
+            while(sigue){
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Introduzca nombre empresa de cable");
+                nombreEmpresaCable = sc.nextLine();
+                if(ValidarNombreEmpresaCable(nombreEmpresaCable.trim())){
+                    this.nombreEmpresaCable = nombreEmpresaCable.trim();
+                    sigue = false;
+                }
+            }
+        }
     }
     
     @Override
@@ -168,16 +207,31 @@ public class Televisor implements interfaz.IValidacionTv{
     
     @Override
     public boolean ValidarPulgadas(int pulgadas){
-        return true;
+        if(pulgadas >= 32 && pulgadas <= 55){
+            return true;
+        }else{
+            System.out.println("Las pulgadas deben estar entre 32 y 55");
+            return false;
+        }
     }
     
     @Override
-    public boolean ValidarSmartTv(char smartTv){
-        return true;
+    public boolean ValidarSmartTv(String smartTv){
+        if(smartTv.matches("[SNsn]{1}")){
+            return true;
+        }else{
+            System.out.println("Debe ingresar solo una letra (S o N)");
+            return false;
+        }
     }
     @Override
     public boolean ValidarNombreEmpresaCable(String nEmpCable){
-        return true;
+        if(nEmpCable.matches("[A-Z]{1}[a-z]{1,7}")){
+            return true;
+        }else{
+            System.out.println("Recuende que la primer letra debe ser mayuscula y las restantes minusculas (Max 8 caracteres)");
+            return false;
+        }
     }
     @Override
     public boolean ValidarValor(float valor){
