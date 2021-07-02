@@ -22,15 +22,6 @@ public class Televisor implements interfaz.IValidacionTv{
     public Televisor() {
     }
 
-    public Televisor(String marca, String modelo, int pulgadas, char smartTv, String nombreEmpresaCable, float valor) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.pulgadas = pulgadas;
-        this.smartTv = smartTv;
-        this.nombreEmpresaCable = nombreEmpresaCable;
-        this.valor = valor;
-    }
-
     public double getValor() {
         return valor;
     }
