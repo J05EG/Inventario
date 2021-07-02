@@ -194,13 +194,13 @@ public class Televisor implements interfaz.IValidacionTv{
                 if(modelo.contains("7")){
                     return true;
                 }else{
-                    System.out.println("no hay un 7");
+                    System.out.println("debe incluir al menos un numero 7");
                 }
             }else{
-                System.out.println("la suma es > 20");
+                System.out.println("La suma de los digitos no debe ser mayor a 20");
             }
         }else{
-            System.out.println("no cumple la expresion");
+            System.out.println("Por favor ingrese 2 consonantes y 4 digitos");
         }
         return false;
     }
