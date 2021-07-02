@@ -62,8 +62,7 @@ public class Inventario {
             }
         }
         System.out.println("Es Smart TV? Ingrese S o N (Si, No)");
-        char siNo = sn.nextLine().charAt(0);
-        tv.setSmartTv(siNo);
+        tv.setSmartTv(sn.nextLine());
         System.out.println("Ingrese Nombre de Empresa Cable (Max 8 caracteres en mayúsculas)");
         tv.setNombreEmpresaCable(sn.nextLine());
         sigue = false;
