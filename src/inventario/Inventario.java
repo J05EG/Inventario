@@ -57,7 +57,7 @@ public class Inventario {
             try{
                 tv.setPulgadas(Integer.valueOf(sn.nextLine()));
                 sigue = true;
-            }catch(Exception e){
+            }catch(NumberFormatException e){
                 System.out.println("Ingresar valor solicitado por favor. Error: "+e.getMessage());
             }
         }
@@ -72,7 +72,7 @@ public class Inventario {
             try{
                 tv.setValor(Float.parseFloat(sn.nextLine()));
                 sigue = true;
-            }catch(Exception e){
+            }catch(NumberFormatException e){
                 System.out.println("Ingresar valor solicitado por favor. Error: "+e.getMessage());
             }
         }
