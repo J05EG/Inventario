@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Jose
+ * @author PC
  */
 public class Televisor implements interfaz.IValidacionTv{
     private String marca;

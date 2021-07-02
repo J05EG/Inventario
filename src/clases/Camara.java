@@ -7,7 +7,7 @@ package clases;
 
 /**
  *
- * @author Jose
+ * @author PC
  */
 public class Camara implements interfaz.IValidacionCam{
     private String codigo;

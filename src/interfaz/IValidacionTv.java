@@ -7,7 +7,7 @@ package interfaz;
 
 /**
  *
- * @author Jose
+ * @author PC
  */
 public interface IValidacionTv {
     public boolean ValidarMarca(String marca);

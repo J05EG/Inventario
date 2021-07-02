@@ -7,7 +7,7 @@ package interfaz;
 
 /**
  *
- * @author Jose
+ * @author PC
  */
 public interface IValidacionCam {
     public boolean ValidarCodigo(String codigo);

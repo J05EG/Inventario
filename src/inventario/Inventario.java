@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Jose
+ * @author PC
  */
 public class Inventario {
 
