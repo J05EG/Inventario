@@ -30,12 +30,11 @@ public class Televisor implements interfaz.IValidacionTv{
         boolean sigue = true;
         if(ValidarValor(valor)){
             this.valor = valor;
-            sigue = false;
         }else{
             while(sigue){
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Introduzca un valor valido");
-                marca = sc.nextLine();
+                valor = Float.parseFloat(sc.nextLine());
                 if(ValidarValor(valor)){
                     this.valor = valor;
                     sigue = false;
@@ -76,7 +75,7 @@ public class Televisor implements interfaz.IValidacionTv{
         }else{
             while(sigue){
                 Scanner sc = new Scanner(System.in);
-                System.out.println("Introduzca una modelo valido");
+                System.out.println("Introduzca un modelo valido");
                 modelo = sc.nextLine();
                 if(ValidarModelo(modelo.trim())){
                     this.modelo = modelo.trim();
@@ -235,7 +234,12 @@ public class Televisor implements interfaz.IValidacionTv{
     }
     @Override
     public boolean ValidarValor(float valor){
-        return valor > 0 && valor < 1000;
+        if(valor > 0 && valor < 1000){
+            return true;
+        }else{
+            System.out.println("El valor debe ser un número positivo menor a 1000 dolares");
+            return false;
+        }
     }
     
     public void printTelevisor(){
