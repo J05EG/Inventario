@@ -5,6 +5,8 @@
  */
 package clases;
 
+import java.util.Scanner;
+
 /**
  *
  * @author PC
@@ -20,21 +22,25 @@ public class Camara implements interfaz.IValidacionCam{
     public Camara() {
     }
 
-    public Camara(String codigo, String modelo, int giro, float megapixeles, float metrosAlcanceWifi, float valor) {
-        this.codigo = codigo;
-        this.modelo = modelo;
-        this.giro = giro;
-        this.megapixeles = megapixeles;
-        this.metrosAlcanceWifi = metrosAlcanceWifi;
-        this.valor = valor;
-    }
-
     public float getValor() {
         return valor;
     }
 
     public void setValor(float valor) {
-        this.valor = valor;
+        boolean sigue = true;
+        if(ValidarValor(valor)){
+            this.valor = valor;
+        }else{
+            while(sigue){
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Introduzca un valor valido");
+                valor = Float.parseFloat(sc.nextLine());
+                if(ValidarValor(valor)){
+                    this.valor = valor;
+                    sigue = false;
+                }
+            }
+        }
     }
 
     public String getCodigo() {
@@ -50,7 +56,20 @@ public class Camara implements interfaz.IValidacionCam{
     }
 
     public void setModelo(String modelo) {
-        this.modelo = modelo;
+        boolean sigue = true;
+        if(ValidarModelo(modelo.trim())){
+            this.modelo = modelo.trim();
+        }else{
+            while(sigue){
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Introduzca un modelo valido");
+                modelo = sc.nextLine();
+                if(ValidarModelo(modelo.trim())){
+                    this.modelo = modelo.trim();
+                    sigue = false;
+                }
+            }
+        }
     }
 
     public int getGiro() {
@@ -84,7 +103,27 @@ public class Camara implements interfaz.IValidacionCam{
 
     @Override
     public boolean ValidarModelo(String modelo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String palabra1 = null;
+        String palabra2 = null;
+        try{
+            String[] palabras = modelo.split(" ");
+            palabra1 = palabras[0];
+            palabra2 = palabras[1];
+            if(palabra1.equalsIgnoreCase("interior") || palabra1.equalsIgnoreCase("exterior")) {
+                if(!palabra2.matches("[^hHfFwW].[a-zA-Z]{1,7}")){
+                    return true;
+                }else{
+                    System.out.println("La segunda palabra no debe incluir los caracteres H, W, F, h, w, f (Max 7 caracteres)");
+                    return false;
+                }
+            }else{
+                System.out.println("La primer palabra debe ser INTERIOR o EXTERIOR");
+                return false;
+            }
+        }catch(Exception e){
+            System.out.println("Favor ingresar 2 palabras. Error: "+e.getMessage());
+            return  false;
+        }
     }
 
     @Override
@@ -104,7 +143,12 @@ public class Camara implements interfaz.IValidacionCam{
 
     @Override
     public boolean ValidarValor(float valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(valor > 100){
+            return true;
+        }else{
+            System.out.println("El valor debe ser un número positivo mayor a 100 dolares");
+            return false;
+        }
     }
     
     public void printCamara(){
