@@ -27,17 +27,21 @@ public class Televisor implements interfaz.IValidacionTv{
     }
 
     public void setValor(float valor) {
-        do{
-            if(ValidarValor(valor)){
-                this.valor = valor;
-            }else{
+        boolean sigue = true;
+        if(ValidarValor(valor)){
+            this.valor = valor;
+            sigue = false;
+        }else{
+            while(sigue){
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Introduzca un valor valido");
-                valor = sc.nextFloat();
-                if(ValidarValor(valor))
-                this.valor = valor;
+                marca = sc.nextLine();
+                if(ValidarValor(valor)){
+                    this.valor = valor;
+                    sigue = false;
+                }
             }
-        }while(!ValidarValor(valor));  
+        }  
     }
 
     public String getMarca() {
@@ -45,18 +49,21 @@ public class Televisor implements interfaz.IValidacionTv{
     }
 
     public void setMarca(String marca) {
-        do{
-            if(ValidarMarca(marca)){
-                this.marca = marca;
-            }else{
+        boolean sigue = true;
+        if(ValidarMarca(marca.trim())){
+            this.marca = marca.trim();
+            sigue = false;
+        }else{
+            while(sigue){
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Introduzca una marca valida");
                 marca = sc.nextLine();
-                if(ValidarMarca(marca))
-                this.marca = marca;
+                if(ValidarMarca(marca.trim())){
+                    this.marca = marca.trim();
+                    sigue = false;
+                }
             }
-        }while(!ValidarMarca(marca)); 
-        this.marca = marca;
+        }
     }
 
     public String getModelo() {
@@ -95,15 +102,13 @@ public class Televisor implements interfaz.IValidacionTv{
     public boolean ValidarMarca(String marca){
         char[] charArray;
         boolean sigue = true;
-        char caracter, caracter2;
+        char caracter;
         int contador = 0;
         charArray = marca.toCharArray();
         for(int i = 0; i < charArray.length; i++){
             caracter = charArray[i];
             for(int j = 0; j < charArray.length; j++){
-                caracter2 = charArray[j];
                 if(charArray[j] == caracter){
-                    
                     contador++;
                 }    
             }
@@ -112,9 +117,14 @@ public class Televisor implements interfaz.IValidacionTv{
             }
             contador = 0;
         }
+        if(!sigue)
+        System.out.println("No se deben reperir letras");
         if(sigue){
-            if(marca.matches("[A-Z]{4,}"))
+            if(marca.matches("[A-Z]{4,}")){
                 return true;
+            }else{
+                System.out.println("Recuenda que deben ser solo mayúsculas minimo 4 caracteres");
+            }     
         }
         return false;
     }
