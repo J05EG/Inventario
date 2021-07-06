@@ -182,7 +182,7 @@ public class Televisor implements interfaz.IValidacionTv{
     
     @Override
     public boolean ValidarModelo(String modelo){
-        if(modelo.matches("(?![aeiouAEIOU])[a-zA-Z]{2}(?![0])[0-9]{3}(?![02468])[0-9]")){
+        if(modelo.matches("((?![aeiouAEIOU])[a-zA-Z]){2}(?![0])[0-9]{3}(?![02468])[0-9]")){
             String numeros = modelo.substring(2,6);
             System.out.println(numeros);
             int suma = 0;
