@@ -163,7 +163,7 @@ public class Televisor implements interfaz.IValidacionTv{
                 }    
             }
             if(contador > 1){
-            sigue = false;
+                sigue = false;
             }
             contador = 0;
         }

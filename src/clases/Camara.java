@@ -48,7 +48,20 @@ public class Camara implements interfaz.IValidacionCam{
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+        boolean sigue = true;
+        if(ValidarCodigo(codigo.trim())){
+            this.codigo = codigo.trim();
+        }else{
+            while(sigue){
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Introduzca un código valido");
+                codigo = sc.nextLine();
+                if(ValidarModelo(codigo.trim())){
+                    this.codigo = codigo.trim();
+                    sigue = false;
+                }
+            }
+        }
     }
 
     public String getModelo() {
@@ -98,7 +111,34 @@ public class Camara implements interfaz.IValidacionCam{
 
     @Override
     public boolean ValidarCodigo(String codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        char[] charArray;
+        boolean sigue = true;
+        char caracter;
+        int contador = 0;
+        charArray = codigo.toCharArray();
+        for(int i = 0; i < charArray.length; i++){
+            caracter = charArray[i];
+            for(int j = 0; j < charArray.length; j++){
+                if(charArray[j] == caracter){
+                    contador++;
+                }    
+            }
+            if(contador > 1){
+                sigue = false;
+            }
+            contador = 0;
+        }
+        if(!sigue){
+            System.out.println("No se deben reperir letras o números");
+        }
+        if(sigue){
+            if(codigo.matches("[A-Z]{4}[0-9]{3}")){
+                return true;
+            }else{
+                System.out.println("Recuenda que deben ser solo mayúsculas, 4 caracteres y 3 números");
+            }     
+        }
+        return false;
     }
 
     @Override
@@ -110,7 +150,7 @@ public class Camara implements interfaz.IValidacionCam{
             palabra1 = palabras[0];
             palabra2 = palabras[1];
             if(palabra1.equalsIgnoreCase("interior") || palabra1.equalsIgnoreCase("exterior")) {
-                if(!palabra2.matches("[^hHfFwW].[a-zA-Z]{1,7}")){
+                if(palabra2.matches("((?![hHfFwW])[a-zA-Z]){1,7}")){
                     return true;
                 }else{
                     System.out.println("La segunda palabra no debe incluir los caracteres H, W, F, h, w, f (Max 7 caracteres)");
@@ -128,17 +168,32 @@ public class Camara implements interfaz.IValidacionCam{
 
     @Override
     public boolean ValidarGiro(int giro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(giro > 0 && giro < 360){
+            return true;
+        }else{
+            System.out.println("El valor debe ser un número positivo menor a 360 dolares");
+            return false;
+        }
     }
 
     @Override
     public boolean ValidarMegapixeles(float megapixeles) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(megapixeles > 5 && megapixeles < 16.3){
+            return true;
+        }else{
+            System.out.println("El valor debe ser un número decimal positivo mayor a 5 y menor a 16.3 Megapixeles");
+            return false;
+        }
     }
 
     @Override
     public boolean ValidarMetrosAlcanceWifi(float alcance) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(alcance > 3 && alcance < 14){
+            return true;
+        }else{
+            System.out.println("El valor debe ser un número decimal positivo mayor a 3 y menor a 14");
+            return false;
+        }
     }
 
     @Override
