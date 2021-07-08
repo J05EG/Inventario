@@ -84,7 +84,7 @@ public class Inventario {
         boolean sigue = false;
         System.out.println("Ingrese Código");
         cam.setCodigo(sn.nextLine());
-        System.out.println("Ingrese Modelo (2 consonantes y 4 números)");
+        System.out.println("Ingrese Modelo (Se compone de 2 palabras: La primera puede decir Interior o Exterior y la segunda hasta 7 caracteres.)");
         cam.setModelo(sn.nextLine());
         while(!sigue){
             System.out.println("Ingrese Giro de 0 a 360° (Solo el número)");

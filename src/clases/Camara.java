@@ -56,7 +56,7 @@ public class Camara implements interfaz.IValidacionCam{
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Introduzca un código valido");
                 codigo = sc.nextLine();
-                if(ValidarModelo(codigo.trim())){
+                if(ValidarCodigo(codigo.trim())){
                     this.codigo = codigo.trim();
                     sigue = false;
                 }
